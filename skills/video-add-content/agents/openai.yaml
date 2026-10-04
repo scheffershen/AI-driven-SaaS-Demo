@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Add Content"
+  short_description: "Prepare covers, five-language captions and verified drafts"
+  default_prompt: "Use $video-add-content to prepare my local video, generate its cover, EN/FR/DE/IT/ES captions, title and description, then upload everything to my Video Workspace and save a verified unpublished draft."

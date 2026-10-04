@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add video content · Video Workspace{% endblock %}
+{% block body %}
+<div class="page-heading"><div><p class="eyebrow">One form. Two ways to work.</p><h1>Add video content</h1><p>Upload your files first, then prepare and save an unpublished draft.</p></div><span class="badge">Draft only</span></div>
+<div class="editor-layout"><section class="panel editor">
+<div id="form-errors" class="error" role="alert">{% for messages in errors %}{% for message in messages %}<p>{{ message }}</p>{% endfor %}{% endfor %}</div>
+{{ form_start(form, {'attr':{'id':'video-form'}}) }}
+{{ form_row(form.title) }}{{ form_row(form.summary) }}
+<div class="field-pair">{{ form_row(form.category) }}{{ form_row(form.language) }}</div>
+<div class="field-pair">{{ form_row(form.content_date) }}{{ form_row(form.asset_id) }}</div>
+<details class="attachment-fields" open><summary>Cover and five subtitle languages</summary>
+{{ form_row(form.cover_id) }}
+<div class="field-pair">{{ form_row(form.subtitle_en) }}{{ form_row(form.subtitle_fr) }}</div>
+<div class="field-pair">{{ form_row(form.subtitle_de) }}{{ form_row(form.subtitle_it) }}</div>
+{{ form_row(form.subtitle_es) }}
+<p class="note">Attach files for the selected video. Covers and subtitles are optional for a draft.</p></details>
+<video id="asset-preview" controls preload="metadata" src="/media/sample"></video>
+<p class="note" id="asset-info">Welcome sample · 8 seconds · Original test pattern</p>
+{{ form_row(form.save, {'attr':{'class':'primary'}}) }}{{ form_end(form) }}
+<div id="save-result" role="status" aria-live="polite"></div>
+<details class="upload"><summary>Upload video, cover and subtitles</summary>
+<p class="note">Upload before entering metadata. Each upload reloads the form. Files stay private to this workspace.</p>
+<form action="/assets/upload" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_token" value="{{ csrf_token('upload_video') }}">
+<label for="upload-file">MP4 video · up to 20 MiB</label><input id="upload-file" type="file" name="video" accept="video/mp4,.mp4" required><button class="secondary">Upload video</button></form>
+{% for kind in ['cover','en','fr','de','it','es'] %}
+<form action="/attachments/upload" method="post" enctype="multipart/form-data" class="attachment-upload">
+<input type="hidden" name="_token" value="{{ csrf_token('upload_attachment') }}">
+<input type="hidden" name="kind" value="{{ kind == 'cover' ? 'cover' : 'caption' }}">
+<input type="hidden" name="language" value="{{ kind == 'cover' ? '' : kind }}">
+<label for="attachment-asset-{{ kind }}">Video for {{ kind == 'cover' ? 'cover' : kind|upper ~ ' subtitles' }}</label>
+<select name="asset_id" id="attachment-asset-{{ kind }}">{% for asset in assets %}<option value="{{ asset.id }}" {{ asset.id == form.asset_id.vars.value ? 'selected' : '' }}>{{ loop.index }} · {{ asset.label }}</option>{% endfor %}</select>
+<label for="upload-{{ kind }}">{{ kind == 'cover' ? 'Cover image · PNG / JPEG / WebP · up to 3 MiB' : kind|upper ~ ' WebVTT subtitles · up to 1 MiB' }}</label>
+<input id="upload-{{ kind }}" type="file" name="attachment" accept="{{ kind == 'cover' ? 'image/png,image/jpeg,image/webp' : '.vtt,text/vtt' }}" required>
+<button class="secondary">Upload {{ kind == 'cover' ? 'cover' : kind|upper ~ ' VTT' }}</button></form>
+{% endfor %}
+</details></section>
+<aside class="panel tools"><p class="eyebrow">Browser tools</p><h2>Agent workspace</h2><p id="native-status" class="capability">Checking native WebMCP…</p><p class="note">An installed skill prepares files and guides the agent; these page tools prepare and save the content.</p>
+<div class="tool-list"><code>get_video_content_form_state</code><code>prepare_video_content_draft</code><code>save_video_content_draft</code><code>get_video_content_draft</code></div>
+<details id="inspector"><summary>Developer tool inspector</summary><p class="note">Local inspector execution is a test surface. Native agent discovery uses the browser’s WebMCP API.</p><label for="tool-name">Tool</label><select id="tool-name"><option>get_video_content_form_state</option><option>prepare_video_content_draft</option><option>save_video_content_draft</option><option>get_video_content_draft</option></select><label for="tool-input">JSON input</label><textarea id="tool-input" rows="7">{}</textarea><button id="execute-tool" type="button" class="secondary">Execute in inspector</button></details>
+<div class="events-heading"><h3>Actual tool events</h3><button type="button" id="clear-events">Clear</button></div><ol id="tool-events" aria-live="polite"></ol><pre id="tool-result" aria-label="Last tool result">No tools executed yet.</pre></aside></div>
+<div id="page-bootstrap" hidden data-state="{{ boot|json_encode|e('html_attr') }}"></div>{% endblock %}
+{% block scripts %}<script type="module" src="/webmcp.js"></script>{% endblock %}

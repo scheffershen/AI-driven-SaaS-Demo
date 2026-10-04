@@ -1,0 +1,28 @@
+{
+  "verified_at": "2026-10-03",
+  "browser": "Chrome 154.0.8037.93",
+  "runtime": "PHP 8.4.26 / Symfony FrameworkBundle 7.4.20",
+  "origin": "http://localhost:8094",
+  "client": "Codex agent through Playwright page evaluation of native document.modelContext",
+  "launch_flags": ["--enable-features=WebMCP", "--enable-blink-features=WebMCP"],
+  "argument_encoding": "JSON string; object input failed on the read-only state call before any mutation",
+  "native_discovered_tools": ["get_video_content_draft", "get_video_content_form_state", "prepare_video_content_draft", "save_video_content_draft"],
+  "manual_saved_id": "0db5d873a400d23c83024bfa",
+  "agent_saved_id": "ec668a8552d7667c6596eda2",
+  "agent_result": {
+    "title": "Welcome to Video Workspace",
+    "summary": "A short introduction to adding video content.",
+    "category": "getting-started",
+    "language": "en",
+    "content_date": "2026-10-03",
+    "asset_id": "sample",
+    "duration": 8,
+    "status": "draft",
+    "published": false,
+    "url": "/content/ec668a8552d7667c6596eda2"
+  },
+  "readback_id_matches_save": true,
+  "page_errors": [],
+  "capture": "tutorial/captures/page@16ad7717a5309b13983cba0b6f425d99.webm",
+  "notes": "Temporary IDs belong to the recorded local workspace and expire after 24 hours. They are execution evidence, not public example links. No third-party consumer agent client was tested."
+}

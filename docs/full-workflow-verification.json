@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-10-03",
+  "browser": "Chrome 154.0.8037.93",
+  "launch_flags": ["--enable-features=WebMCP,WebMCPTesting"],
+  "client": "Codex agent through Playwright native document.modelContext.getTools/executeTool",
+  "generation": "Local faster-whisper base.en transcription, FFmpeg extracted cover, agent-written title/description and five cue translations, helper VTT export",
+  "source": "Original 3.984-second test pattern with generated English narration",
+  "save_id": "c139d89040a66c13440d52aa",
+  "manual_save_id": "1a467f4b4a78df0f4f22945d",
+  "manual_detail_video_track_count": 5,
+  "asset_id": "4e310e190ebb3d837b5724bffd7b7ed9",
+  "cover_id": "b1905fd0abf19aa6374792c3fc88896e",
+  "subtitle_ids": {
+    "en": "d3ab828b02d5038f713d51a3334c0f69",
+    "fr": "9cadefe2b556af137da583cb43885279",
+    "de": "939a2fe55b9000ed7fe7aa3f0f9671e3",
+    "it": "02e7fba6e599c7920a65d2cac9b1fe72",
+    "es": "dca3a2bf015b0a05a29db9d1fdb87af5"
+  },
+  "readback_matches": true,
+  "detail_video_track_count": 5,
+  "cover_and_five_vtt_links_present": true,
+  "status": "draft",
+  "published": false,
+  "page_errors": []
+}
